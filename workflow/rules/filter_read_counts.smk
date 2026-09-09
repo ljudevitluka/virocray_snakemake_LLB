@@ -7,7 +7,8 @@ rule filter_read_counts:
         stats    = RESULTS_DIR + "/merged/reps_read_counts_samples_filtered_stats.tsv"
     params:
         min_reads = 2,
-        min_breadth = 0.25
+        min_breadth = 0.25,
+        min_covered_bases = 400
     log:
         logO = "logs/filter_read_counts/filter_breadth.log",
         logE = "logs/filter_read_counts/filter_breadth.err.log"
@@ -22,5 +23,6 @@ rule filter_read_counts:
             --out-stats {output.stats} \
             --min-reads {params.min_reads} \
             --min-breadth {params.min_breadth} \
+            --min-covered_bases {params.min_covered_bases} \
             > {log.logO} 2> {log.logE}
         """
