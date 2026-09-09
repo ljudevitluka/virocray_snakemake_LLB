@@ -1,0 +1,2 @@
+Config file refers to the file sample.tsv, which contains Biosample_IDs used in the workflow. 
+SRR accessions, corresponding to each Biosample_ID, are listed in the file workflow/scripts/biosample_ID.txt. Biosample_IDs are in the first column, followed by the SRR accessions associated with this ID. All IDs and accessions must be separated by spaces.

@@ -1,0 +1,9 @@
+name: core_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas=2.1
+  - biopython=1.81

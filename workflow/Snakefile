@@ -1,0 +1,63 @@
+# conda activate snakemake
+# snakemake --use-conda --cores 60 -k -p
+
+
+import os
+import pandas as pd
+
+
+#Define config file
+configfile: "config/config.yaml"
+
+#Define sample list
+samples = pd.read_table(config["samples"])
+sample_names = samples["sample"].tolist()
+
+# Define base directory for results
+RESULTS_DIR = "results"
+
+
+rule all:
+    input:
+        expand("results/{sample}/03_{sample}_mmseqs2_taxonomy.tsv", sample=samples["sample"].tolist()),
+        expand("results/{sample}/04_{sample}_viral_contigs.fasta", sample=samples["sample"].tolist()),
+        expand("results/{sample}/04_{sample}_viral_taxonomy.tsv", sample=samples["sample"].tolist()),
+        expand(
+            RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.tsv",
+            sample=samples["sample"].tolist()
+        ),
+        RESULTS_DIR + "/merged/clusters_with_taxonomy.tsv",
+        expand(
+            RESULTS_DIR + "/{sample}/09_{sample}_breadth.tsv",
+            sample=samples["sample"].tolist()
+        ),
+        RESULTS_DIR + "/merged/rpkm_long.tsv",
+        RESULTS_DIR + "/merged/presence_absence_long.tsv",
+        RESULTS_DIR + "/merged/cluster_representatives_blastx_reps_nr.tsv",
+
+##### Modules #####
+include: "rules/trimmomatic.smk"
+include: "rules/spades.smk"
+include: "rules/rename_contigs.smk"
+include: "rules/filter_viral_contigs_by_length.smk"
+include: "rules/mmseqs2.smk"
+include: "rules/mmseqs2_tsv.smk"
+include: "rules/extract_viral_contigs.smk"
+include: "rules/merge_contigs.smk"
+include: "rules/merge_taxonomy_tables.smk"
+include: "rules/blast.smk"
+include: "rules/sort_remove_self.smk"
+include: "rules/filter_edges.smk"
+include: "rules/clustering.smk"
+include: "rules/merge_taxonomy_clusters.smk"
+include: "rules/select_reps.smk"
+include: "rules/filter_reps_length.smk"
+include: "rules/bbmap_to_reps.smk"
+include: "rules/coverm.smk"
+include: "rules/calculate_breadth.smk"
+include: "rules/merge_read_counts_samples.smk"
+include: "rules/merge_breadth.smk"
+include: "rules/filter_read_counts.smk"
+include: "rules/calculate_rpkm.smk"
+include: "rules/blastx_reps_nr.smk"
+include: "rules/fill_blastx_missing.smk"

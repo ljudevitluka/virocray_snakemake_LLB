@@ -1,0 +1,7 @@
+.snakemake/
+results/
+resources/
+logs/
+*.bam
+*.fastq
+data/

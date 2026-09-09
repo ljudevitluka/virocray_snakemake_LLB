@@ -1,0 +1,11 @@
+# Raw sequencing reads and other large input files
+resources/
+
+# Generated workflow output and runtime files
+results/
+logs/
+.snakemake/
+
+# Local editor and operating-system files
+.DS_Store
+*.swp

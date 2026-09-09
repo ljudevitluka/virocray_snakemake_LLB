@@ -1,0 +1,12 @@
+name: clustering_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas=2.1
+  - networkx=3.2
+  - biopython=1.81
+  - python-igraph
+  - leidenalg

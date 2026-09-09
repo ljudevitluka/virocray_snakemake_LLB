@@ -1,0 +1,16 @@
+name: mapping_env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - bowtie2>=2.5
+  - samtools>=1.17
+  - coverm>=0.6
+  - pigz
+  - pandas
+  - bbmap
+  - biopython=1.81
+  - pysam
+
+
