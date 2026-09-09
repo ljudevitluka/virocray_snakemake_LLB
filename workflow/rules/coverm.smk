@@ -27,7 +27,7 @@ rule coverm:
         coverm contig \
             --bam-files {output.filtered_bam} \
             --threads {threads} \
-            --methods count tpm rpkm \
+            --methods count tpm rpkm covered_fraction covered_bases \
             --output-file {output.tsv} \
             >> {log.logO} 2>> {log.logE}
 
