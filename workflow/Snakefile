@@ -42,6 +42,7 @@ rule all:
         RESULTS_DIR + "/merged/reps_covered_bases_samples.tsv",
         RESULTS_DIR + "/merged/reps_read_counts_samples_filtered.tsv",
         RESULTS_DIR + "/merged/reps_read_counts_samples_filtered_stats.tsv",
+        RESULTS_DIR + "/merged/reps_tpm_samples_filtered.tsv",
 
 ##### Modules #####
 include: "rules/trimmomatic.smk"
@@ -67,6 +68,7 @@ include: "rules/calculate_read_count_percentage.smk"
 include: "rules/merge_covered_bases_samples.smk"
 include: "rules/merge_covered_fraction_samples.smk"
 include: "rules/filter_read_counts.smk"
+include: "rules/calculate_tpm.smk"
 ##include: "rules/calculate_rpkm.smk"
 ##include: "rules/blastx_reps_nr.smk"
 ##include: "rules/fill_blastx_missing.smk"
