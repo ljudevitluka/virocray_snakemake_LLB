@@ -19,14 +19,27 @@ RESULTS_DIR = "results"
 
 rule all:
     input:
-        expand("results/{sample}/03_{sample}_mmseqs2_taxonomy.tsv", sample=samples["sample"].tolist()),
-        expand("results/{sample}/04_{sample}_viral_contigs.fasta", sample=samples["sample"].tolist()),
-        expand("results/{sample}/04_{sample}_viral_taxonomy.tsv", sample=samples["sample"].tolist()),
+        expand(
+            RESULTS_DIR + "/{sample}/03_{sample}_mmseqs2_taxonomy.tsv",
+            sample=samples["sample"].tolist()
+        ),
+        expand(
+            RESULTS_DIR + "/{sample}/04_{sample}_viral_contigs.fasta",
+            sample=samples["sample"].tolist()
+        ),
+        expand(
+            RESULTS_DIR + "/{sample}/04_{sample}_viral_taxonomy.tsv",
+            sample=samples["sample"].tolist()
+        ),
         expand(
             RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.tsv",
             sample=samples["sample"].tolist()
         ),
         RESULTS_DIR + "/merged/clusters_with_taxonomy.tsv",
+        RESULTS_DIR + "/merged/reps_read_counts_samples.tsv",
+        RESULTS_DIR + "/merged/reps_read_count_percentage_samples.tsv",
+        RESULTS_DIR + "/merged/reps_covered_fraction_samples.tsv",
+        RESULTS_DIR + "/merged/reps_covered_bases_samples.tsv",
         RESULTS_DIR + "/merged/reps_read_counts_samples_filtered.tsv",
         RESULTS_DIR + "/merged/reps_read_counts_samples_filtered_stats.tsv",
 
@@ -50,6 +63,7 @@ include: "rules/filter_reps_length.smk"
 include: "rules/bbmap_to_reps.smk"
 include: "rules/coverm.smk"
 include: "rules/merge_read_counts_samples.smk"
+include: "rules/calculate_read_count_percentage.smk"
 include: "rules/merge_covered_bases_samples.smk"
 include: "rules/merge_covered_fraction_samples.smk"
 include: "rules/filter_read_counts.smk"
