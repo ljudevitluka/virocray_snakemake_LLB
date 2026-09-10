@@ -1,6 +1,6 @@
 rule extract_viral_contigs:
     input:
-        fasta="results/{sample}/02_{sample}_spades_rnaviral_contigs_renamed.fasta",
+        fasta="results/{sample}/02_{sample}_spades_rnaviral_contigs_renamed_min500.fasta",
         taxonomy="results/{sample}/03_{sample}_mmseqs2_taxonomy.tsv",
     output:
         viral_fasta="results/{sample}/04_{sample}_viral_contigs.fasta",
