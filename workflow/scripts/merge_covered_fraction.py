@@ -21,13 +21,20 @@ def normalise_column_name(column):
     return "".join(str(column).lower().split()).replace("_", "")
 
 
+def find_metric_column(columns, metric):
+    matches = [column for name, column in columns.items() if name.endswith(metric)]
+    if len(matches) != 1:
+        return None
+    return matches[0]
+
+
 def load_covered_fraction(file, sample_name):
     dataframe = pd.read_csv(file, sep="\t")
     dataframe.columns = dataframe.columns.str.strip()
     columns = {normalise_column_name(column): column for column in dataframe.columns}
 
     contig_column = columns.get("contig")
-    fraction_column = columns.get("coveredfraction")
+    fraction_column = find_metric_column(columns, "coveredfraction")
     if not contig_column or not fraction_column:
         raise ValueError(
             f"CoverM file {file} must contain Contig and Covered Fraction columns"
