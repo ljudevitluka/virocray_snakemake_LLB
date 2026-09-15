@@ -1,0 +1,6 @@
+##Run the script with the following command
+
+source /proj/etools/conda/etc/profile.d/conda.sh
+conda activate snakemake
+cd /scratch/lukabostjancic/ViroCray/virocray_snakemake_LLB
+snakemake --use-conda -k -p --cores 60   --conda-frontend conda   --rerun-incomplete
