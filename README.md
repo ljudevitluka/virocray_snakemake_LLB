@@ -57,6 +57,10 @@ CONDA_EXE=/path/to/conda ./run_snakemake.sh --cores 1 --dry-run
 
 The workflow configuration and sample list are defined in `config/config.yaml` and the file referenced by its `samples` setting.
 
+## Pipeline changes
+
+The `filter_edges` rule now uses a minimum average nucleotide identity (`min_ani`) of `90.0`, reduced from `95.0`. This allows edges with ANI from 90% while retaining the existing alignment-coverage and HSP-length filters.
+
 ## Troubleshooting
 
 Inspect the rule-specific error log when a job fails. Logs are stored under `logs/`, with a separate directory for each rule.
