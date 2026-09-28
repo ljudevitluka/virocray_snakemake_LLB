@@ -43,6 +43,8 @@ rule all:
         RESULTS_DIR + "/merged/reps_read_counts_samples_filtered.tsv",
         RESULTS_DIR + "/merged/reps_read_counts_samples_filtered_stats.tsv",
         RESULTS_DIR + "/merged/reps_tpm_samples_filtered.tsv",
+        RESULTS_DIR + "/merged/clustering_qc/clustering_qc.pdf",
+
 
 ##### Modules #####
 include: "rules/trimmomatic.smk"
@@ -72,3 +74,4 @@ include: "rules/calculate_tpm.smk"
 ##include: "rules/calculate_rpkm.smk"
 ##include: "rules/blastx_reps_nr.smk"
 ##include: "rules/fill_blastx_missing.smk"
+include: "rules/visualize_clustering.smk"
