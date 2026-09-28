@@ -61,6 +61,26 @@ The workflow configuration and sample list are defined in `config/config.yaml` a
 
 The `filter_edges` rule now uses a minimum average nucleotide identity (`min_ani`) of `90.0`, reduced from `95.0`. This allows edges with ANI from 90% while retaining the existing alignment-coverage and HSP-length filters.
 
+## Clustering QC visualisation
+
+After the Leiden clustering step, the workflow also generates a clustering quality figure at:
+
+```text
+results/merged/clustering_qc/clustering_qc.pdf
+```
+
+The plot summarises three things:
+
+- clustered vs singleton contigs,
+- contig degree distribution (number of edges per contig),
+- cluster-size distribution across multi-member clusters.
+
+It is included in the default target set and can be regenerated with:
+
+```bash
+./run_snakemake.sh --cores 60 -k -p
+```
+
 ## Troubleshooting
 
 Inspect the rule-specific error log when a job fails. Logs are stored under `logs/`, with a separate directory for each rule.

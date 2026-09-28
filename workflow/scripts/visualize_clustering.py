@@ -89,6 +89,8 @@ def load_clusters(clusters_path):
 def load_stats(stats_path):
     log(f"Reading stats: {stats_path}")
     df = pd.read_csv(stats_path, sep="\t")
+    if df.empty:
+        log("  No clustering stats rows found; continuing with summary-only output.")
     return df
 
 
@@ -280,8 +282,11 @@ def main():
 
     # ── print summary to stdout ───────────────────────────────────────────
     log("=== Clustering summary ===")
-    for col in stats_df.columns:
-        log(f"  {col}: {stats_df[col].iloc[0]}")
+    if not stats_df.empty:
+        for col in stats_df.columns:
+            log(f"  {col}: {stats_df[col].iloc[0]}")
+    else:
+        log("  Clustering stats file was empty.")
     log(f"  Total contigs in FASTA : {len(all_contigs):,}")
     log(f"  Total edges            : {len(edges_df):,}")
 
