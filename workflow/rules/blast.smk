@@ -16,7 +16,9 @@ rule blast:
             -out {RESULTS_DIR}/merged/blastdb \
             > {log.logO} 2> {log.logE}
         
-        blastn -query {input.f} \
+        blastn -task blastn \
+            -word_size 23 \
+            -query {input.f} \
             -db {RESULTS_DIR}/merged/blastdb \
             -out {output.t} \
             -outfmt "6 qseqid sseqid pident length qstart qend sstart send" \

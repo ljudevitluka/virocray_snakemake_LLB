@@ -71,8 +71,3 @@ To check the workflow without running jobs:
 ./run_snakemake.sh --cores 1 --dry-run
 ```
 
-A Conda warning about strict channel priority is separate from the Python import failure. For more reproducible Conda resolution, strict channel priority can be enabled with:
-
-```bash
-conda config --set channel_priority strict
-```

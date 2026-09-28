@@ -75,7 +75,7 @@ def flush_pair(A, B, hsps, lengths, args, out_pairs_f, out_edges_f):
     ani = compute_ani(hsps) * 100.0
     max_hsp = max(h["len"] for h in hsps)
     afA, afB = compute_af(hsps, lenA, lenB)
-    min_af = min(afA, afB)
+    min_af = afA if lenA <= lenB else afB
 
     if ani < args.min_ani:
         return
