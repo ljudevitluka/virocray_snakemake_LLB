@@ -5,7 +5,7 @@
 Run the pipeline from the project root with the included launcher:
 
 ```bash
-cd /scratch/lukabostjancic/ViroCray/virocray_snakemake_LLB
+cd /path/to/root/virocray_snakemake_LLB
 ./run_snakemake.sh --cores 60 -k -p
 ```
 
@@ -13,20 +13,6 @@ The launcher automatically enables Snakemake's per-rule Conda environments. Any 
 
 ```bash
 ./run_snakemake.sh --cores 1 --dry-run
-```
-
-To run the workflow in a `screen` session:
-
-```bash
-screen -S virocray
-cd /scratch/lukabostjancic/ViroCray/virocray_snakemake_LLB
-./run_snakemake.sh --cores 60 -k -p
-```
-
-Detach from the session with `Ctrl-a` followed by `d`. Reconnect later with:
-
-```bash
-screen -r virocray
 ```
 
 ## Why use the launcher?
@@ -59,9 +45,9 @@ The workflow configuration and sample list are defined in `config/config.yaml` a
 
 ## Pipeline changes
 
-The `filter_edges` rule now uses a minimum average nucleotide identity (`min_ani`) of `90.0`, reduced from `95.0`. This allows edges with ANI from 90% while retaining the existing alignment-coverage and HSP-length filters.
+1. The `filter_edges` rule now uses a minimum average nucleotide identity (`min_ani`) of `90.0`, reduced from `95.0` and AF (`min_af`) of `0.80`, reduced from `85`.
 
-## Clustering QC visualisation
+2. Clustering QC visualisation 
 
 After the Leiden clustering step, the workflow also generates a clustering quality figure at:
 
@@ -75,11 +61,6 @@ The plot summarises three things:
 - contig degree distribution (number of edges per contig),
 - cluster-size distribution across multi-member clusters.
 
-It is included in the default target set and can be regenerated with:
-
-```bash
-./run_snakemake.sh --cores 60 -k -p
-```
 
 ## Troubleshooting
 
