@@ -7,7 +7,7 @@ rule filter_edges:
         edges = RESULTS_DIR + "/merged/edges_filtered.tsv"
     params:
         min_ani = 95.0,
-        filter_mode = "HSP",
+        filter_mode = "AF",
         min_hsp_len = 150,
         min_af = 0.85
     log:

@@ -17,7 +17,7 @@ rule blast:
             > {log.logO} 2> {log.logE}
         
         blastn -task blastn \
-            -word_size 23 \
+            -word_size 28 \
             -query {input.f} \
             -db {RESULTS_DIR}/merged/blastdb \
             -out {output.t} \
