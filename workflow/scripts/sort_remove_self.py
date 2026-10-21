@@ -36,6 +36,13 @@ def main():
 
             a, b = sorted([q, s])
 
+            # BLAST columns: qseqid sseqid pident length qstart qend sstart send
+            # Swap query/subject columns when the query is B, so that
+            # qstart/qend are always coordinates on A and sstart/send on B.
+            if q != a:
+                parts = [parts[1], parts[0], parts[2], parts[3],
+                         parts[6], parts[7], parts[4], parts[5]] + parts[8:]
+
             records.append((a, b, parts))
 
     log(f"Total valid pairs collected: {len(records)}")
