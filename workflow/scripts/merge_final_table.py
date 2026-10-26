@@ -14,6 +14,7 @@ def parse_args():
     p.add_argument("--tpm", required=True, help="TPM table with rep_contig and one column per sample")
     p.add_argument("--taxonomy", required=True, help="clusters_with_taxonomy.tsv (contig_id, cluster_id, MMseqs2 taxonomy)")
     p.add_argument("--blastx", required=True, help="blastx table from fill_missing_blastx.py (qseqid = <contig>_cluster_<n>)")
+    p.add_argument("--annotation", required=True, help="reps_functional_annotation.tsv (contig_id, RdRp calls, InterPro)")
     p.add_argument("--output", required=True)
     return p.parse_args()
 
@@ -28,6 +29,7 @@ def main():
     tpm = pd.read_csv(args.tpm, sep="\t")
     taxonomy = pd.read_csv(args.taxonomy, sep="\t")
     blastx = pd.read_csv(args.blastx, sep="\t", dtype=str)
+    annotation = pd.read_csv(args.annotation, sep="\t", dtype=str)
     log(f"Representatives in TPM table: {len(tpm)}")
 
     tpm = tpm.rename(columns={"rep_contig": "contig_id"})
@@ -47,10 +49,13 @@ def main():
                                     if c not in ("contig_id", "blastx_status")})
     merged = merged.merge(blastx, on="contig_id", how="left", validate="one_to_one")
 
+    merged = merged.merge(annotation, on="contig_id", how="left", validate="one_to_one")
+
     log(f"With MMseqs2 taxonomy: {merged['taxonomic_name'].notna().sum()}")
     log(f"With blastx hit: {(merged['blastx_status'] == 'hit').sum()}")
     if merged["blastx_status"].isna().any():
         log(f"[WARN] Missing from blastx table: {merged['blastx_status'].isna().sum()}")
+    log(f"With RdRp: {(merged['has_RdRp'] == 'yes').sum()}")
 
     merged.to_csv(args.output, sep="\t", index=False)
     log(f"Wrote {len(merged)} rows to {args.output}")

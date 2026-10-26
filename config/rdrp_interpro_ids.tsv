@@ -1,0 +1,68 @@
+interpro_id	name	note
+IPR007094	RNA-directed RNA polymerase, catalytic domain	positive-strand RNA viruses of eukaryotes (PROSITE PS50507)
+IPR001795	RNA-directed RNA polymerase, Orthornavirae	broad family
+IPR001205	RNA-directed RNA polymerase, C-terminal domain	Pfam RdRP_1 (picorna-like)
+IPR001788	RNA-dependent RNA polymerase, alsuviricetes
+IPR054403	RNA-dependent RNA polymerase, palm domain, ribovirus
+IPR054433	RNA-dependent RNA polymerase, thumb domain, ribovirus
+IPR042032	Viral RNA-directed RNA polymerase, 4-helical domain
+IPR007096	RNA-directed RNA polymerase, catalytic domain, bacteriophage
+IPR005093	RNA-directed RNA polymerase beta-chain	leviviruses
+IPR016406	Cystovirus, RNA-directed RNA polymerase
+IPR043110	Cystovirus, RNA-directed RNA polymerase, N-terminal
+IPR008686	RNA-dependent RNA polymerase, mitoviral
+IPR000208	RNA-directed RNA polymerase, fingers/palm subdomains, flavivirus
+IPR046811	RNA-directed RNA polymerase, thumb subdomain, flavivirus
+IPR047530	RNA-dependent RNA polymerase, flavivirus
+IPR002166	RNA dependent RNA polymerase, hepatitis C virus
+IPR047307	RNA-dependent RNA polymerase, hepevirus
+IPR047306	RNA-dependent RNA polymerase, matonavirus
+IPR047311	RNA-dependent RNA polymerase, togavirus
+IPR047310	RNA-dependent RNA polymerase, virgavirus
+IPR047309	RNA-dependent RNA polymerase, bromovirus
+IPR047308	RNA-dependent RNA polymerase, closterovirus
+IPR008744	RNA-directed RNA polymerase, apple chlorotic leaf spot virus
+IPR013674	Luteovirus RNA polymerase P1-P2/replicase
+IPR018019	Luteovirus Orf2 putative replicase 1
+IPR046441	RNA-dependent RNA polymerase, coronavirus
+IPR009469	RNA-dependent RNA polymerase, N-terminal, coronavirus
+IPR044356	RNA-dependent RNA polymerase, alphacoronavirus
+IPR044349	RNA-dependent RNA polymerase, bat coronavirus HKU9-like
+IPR044347	RNA-dependent RNA polymerase, coronavirus HKU1-like
+IPR044354	RNA-dependent RNA polymerase, deltacoronavirus
+IPR044358	RNA-dependent RNA polymerase, gammacoronavirus
+IPR044350	RNA-dependent RNA polymerase, Middle East respiratory syndrome-related coronavirus
+IPR044351	RNA-dependent RNA polymerase, SARS-CoV-like
+IPR007099	RNA-directed RNA polymerase, negative-strand RNA virus
+IPR014023	Mononegavirales RNA-directed RNA polymerase catalytic domain
+IPR017235	RNA-directed RNA polymerase L, filovirus
+IPR016269	RNA-directed RNA polymerase, paramyxovirus
+IPR017234	RNA-directed RNA polymerase, rhabdovirus
+IPR039736	RNA-directed RNA polymerase L, C-terminal
+IPR029124	RNA-directed RNA polymerase L, N-terminal
+IPR007322	RNA-dependent RNA polymerase, bunyaviral
+IPR048547	RNA-directed RNA polymerase L, thumb ring domain, bunyaviral
+IPR022531	RNA-directed RNA polymerase L, PA-C-like domain
+IPR016268	RNA-directed RNA polymerase, hantavirus
+IPR024378	RNA-directed RNA polymerase, hantavirus, N-terminal
+IPR015843	RNA-directed RNA polymerase, nairovirus
+IPR014384	RNA-directed RNA polymerase, orthobunyavirus
+IPR014385	RNA-directed RNA polymerase, phlebovirus
+IPR015842	RNA-directed RNA polymerase, tenuivirus
+IPR015841	RNA-directed RNA polymerase, tospovirus
+IPR010453	RNA polymerase, arenaviral
+IPR001407	Influenza RNA-dependent RNA polymerase subunit PB1	PB1 is the catalytic subunit
+IPR007097	RNA-directed RNA polymerase, reovirus
+IPR054006	RNA-directed RNA polymerase, N-terminal	reoviruses
+IPR054002	RNA-directed RNA polymerase, C-terminal
+IPR012915	Reovirus RNA-dependent RNA polymerase lambda 3
+IPR008723	RNA-dependent RNA polymerase, orbiviral
+IPR014383	RNA-directed RNA polymerase, phytoreovirus
+IPR022071	Rotavirus VP1 RNA-directed RNA polymerase, C-terminal
+IPR026381	RNA-directed RNA polymerase	seadornavirus VP1
+IPR007100	Birnavirus RNA-directed RNA polymerase, palm domain
+IPR046750	RNA-directed RNA polymerase, C-terminal, birnavirus
+IPR046752	RNA-directed RNA polymerase, thumb domain, birnavirus
+IPR046812	RNA-directed RNA polymerase, palm domain superfamily, Birnavirus
+IPR046813	RNA-directed RNA polymerase, thumb domain superfamily, Birnavirus
+IPR046814	RNA-directed RNA polymerase, C-terminal domain superfamily, Avibirnavirus

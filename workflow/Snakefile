@@ -45,6 +45,8 @@ rule all:
         RESULTS_DIR + "/merged/reps_tpm_samples_filtered.tsv",
         RESULTS_DIR + "/merged/clustering_qc/clustering_qc.pdf",
         RESULTS_DIR + "/merged/cluster_representatives_blastx_reps_nr.tsv",
+        RESULTS_DIR + "/merged/functional_annotation/reps_functional_annotation.tsv",
+        RESULTS_DIR + "/merged/functional_annotation/reps_rdrp_proteins.faa",
         RESULTS_DIR + "/merged/final_table_tpm_taxonomy_blastx.tsv",
 
 
@@ -82,5 +84,7 @@ include: "rules/calculate_tpm.smk"
 ###Add blastx results to final dataset
 include: "rules/blastx_reps_nr.smk"
 include: "rules/fill_blastx_missing.smk"
+###Add functional annotation of RdRps (InterProScan, NeoRdRp2)
+include: "rules/functional_annotation.smk"
 include: "rules/merge_final_table.smk"
 

@@ -1,0 +1,7 @@
+name: emboss_env
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - emboss=6.6.0
+  - seqkit=2.6.1

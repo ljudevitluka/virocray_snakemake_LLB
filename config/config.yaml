@@ -1,8 +1,8 @@
 samples: config/samples.tsv
 
 ##### Databases #####
-# MMseqs2 nr database used for contig taxonomy
-mmseqs2_db: /biodbs/mmseqs2/nr_database/nr.fnaDB
+# MMseqs2 nr database used for contig taxonomy (own build, Oct 2026)
+mmseqs2_db: /scratch/lukabostjancic/ViroCray/2026_10_mmseq2/nr.fnaDB
 # nr database for DIAMOND blastx: BLAST nr (DIAMOND >= 2.x reads it directly, incl. taxonomy)
 diamond_nr_db: /biodbs/blastdb/220.ncbi/nr
 # NCBI new_taxdump dir with names.dmp/nodes.dmp (needed by DIAMOND for sscinames)
@@ -34,3 +34,23 @@ filter_read_counts:
   min_reads: 2
   min_covered_fraction: 0.25
   min_covered_bases: 400
+
+##### Functional annotation #####
+getorf:
+  min_orf_nt: 300      # minimum ORF length in nt (300 nt = 100 aa)
+  table: 1             # genetic code (1 = standard)
+annotation_chunks: 20  # ORFs are split into this many chunks for InterProScan / hmmsearch
+interproscan:
+  path: /scratch/lukabostjancic/ViroCray/interproscan/interproscan-5.78-109.0/interproscan.sh
+  applications: Pfam,CDD,SUPERFAMILY,Gene3D,ProSiteProfiles,NCBIfam
+neordrp:
+  hmm: /biodbs/NeoRdRp2/NeoRdRp.2.1.hmm
+  evalue: 1e-10        # E-value used in the NeoRdRp2 paper
+rdrp:
+  # InterPro entries counted as RdRp (edit this file to add or remove entries)
+  interpro_ids: config/rdrp_interpro_ids.tsv
+  # Member-database signatures without an InterPro entry (e.g. CDD cd23xxx) count as RdRp
+  # when their description matches this pattern
+  signature_regex: "RdRp|RdRP_[0-9]|RNA-directed RNA polymerase|RNA-dependent RNA polymerase"
+  # Signatures never counted as RdRp: PF05183 = eukaryotic (host) RNA-dependent RNA polymerase
+  exclude_signatures: [PF05183]
