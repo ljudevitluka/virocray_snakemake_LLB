@@ -4,8 +4,10 @@ rule coverm:
         bai = RESULTS_DIR + "/{sample}/07_{sample}_bbmap_reps.bam.bai"
     output:
         tsv     = RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.tsv",
-        filtered_bam = RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.bam",
-        check   = RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.done"
+        filtered_bam = RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.bam"
+    params:
+        min_identity        = config["coverm"]["min_read_percent_identity"],
+        min_aligned_percent = config["coverm"]["min_read_aligned_percent"]
     log:
         logO = "logs/coverm/{sample}.log",
         logE = "logs/coverm/{sample}.err.log"
@@ -17,8 +19,8 @@ rule coverm:
         coverm filter \
             --bam-files {input.bam} \
             --threads {threads} \
-            --min-read-percent-identity 95 \
-            --min-read-aligned-percent 95 \
+            --min-read-percent-identity {params.min_identity} \
+            --min-read-aligned-percent {params.min_aligned_percent} \
             --output-bam-files {output.filtered_bam} \
             > {log.logO} 2> {log.logE}
 
@@ -30,6 +32,4 @@ rule coverm:
             --methods count tpm rpkm covered_fraction covered_bases \
             --output-file {output.tsv} \
             >> {log.logO} 2>> {log.logE}
-
-        touch {output.check}
         """

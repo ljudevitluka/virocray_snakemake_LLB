@@ -3,6 +3,8 @@ rule filter_viral_contigs_by_length:
         f = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed.fasta"
     output:
         f = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed_min500.fasta"
+    params:
+        min_len = config["min_contig_length"]
     log:
         logO = "logs/filter_length/{sample}.log",
         logE = "logs/filter_length/{sample}.err.log"
@@ -12,5 +14,5 @@ rule filter_viral_contigs_by_length:
     shell:
         r"""
         set -euo pipefail
-        seqkit seq -m 500 {input.f} > {output.f} 2> {log.logE}
+        seqkit seq -m {params.min_len} {input.f} > {output.f} 2> {log.logE}
         """

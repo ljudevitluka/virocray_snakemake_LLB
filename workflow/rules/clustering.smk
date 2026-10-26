@@ -6,7 +6,7 @@ rule clustering:
         clusters = RESULTS_DIR + "/merged/clusters.tsv",
         stats    = RESULTS_DIR + "/merged/clusters_stats.tsv"
     params:
-        resolution = 1.0
+        resolution = config["clustering"]["resolution"]
     log:
         logO = "logs/clustering/clustering.log",
         logE = "logs/clustering/clustering.err.log"

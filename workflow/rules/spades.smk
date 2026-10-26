@@ -1,10 +1,10 @@
 rule spades:
     input:
-        r1="results/{sample}/01_{sample}_trim_1_paired.fq.gz",
-        r2="results/{sample}/01_{sample}_trim_2_paired.fq.gz"
+        r1=RESULTS_DIR + "/{sample}/01_{sample}_trim_1_paired.fq.gz",
+        r2=RESULTS_DIR + "/{sample}/01_{sample}_trim_2_paired.fq.gz"
     output:
-        d=temp(directory("results/{sample}/02_{sample}_spades_rnaviral_dir")),
-        f="results/{sample}/02_{sample}_spades_rnaviral_contigs.fasta"
+        d=temp(directory(RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_dir")),
+        f=RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs.fasta"
     log:
         logO="logs/spades/{sample}.log",
         logE="logs/spades/{sample}.err.log"

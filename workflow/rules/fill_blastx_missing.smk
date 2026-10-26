@@ -1,6 +1,6 @@
 rule fill_blastx_missing:
     input:
-        fasta = RESULTS_DIR + "/merged/cluster_representatives_filtered_length.fasta",
+        fasta = RESULTS_DIR + "/merged/cluster_representatives.fasta",
         blast = RESULTS_DIR + "/merged/cluster_representatives_blastx_reps_nr.raw.tsv"
 
     output:

@@ -6,10 +6,10 @@ rule filter_edges:
         pairs = RESULTS_DIR + "/merged/blastn_pairs_sorted_no_self_filtered.tsv",
         edges = RESULTS_DIR + "/merged/edges_filtered.tsv"
     params:
-        min_ani = 90.0,
-        filter_mode = "AF",
-        min_hsp_len = 150,
-        min_af = 0.80
+        min_ani = config["filter_edges"]["min_ani"],
+        filter_mode = config["filter_edges"]["filter_mode"],
+        min_hsp_len = config["filter_edges"]["min_hsp_len"],
+        min_af = config["filter_edges"]["min_af"]
     log:
         logO="logs/filter_edges/filter_edges.log",
         logE="logs/filter_edges/filter_edges.err.log"

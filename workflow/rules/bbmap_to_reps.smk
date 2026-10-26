@@ -5,8 +5,10 @@ rule bbmap_to_reps:
         ref = RESULTS_DIR + "/merged/cluster_representatives.fasta"
     output:
         bam   = RESULTS_DIR + "/{sample}/07_{sample}_bbmap_reps.bam",
-        bai   = RESULTS_DIR + "/{sample}/07_{sample}_bbmap_reps.bam.bai",
-        check = RESULTS_DIR + "/{sample}/07_{sample}_bbmap_reps.done"
+        bai   = RESULTS_DIR + "/{sample}/07_{sample}_bbmap_reps.bam.bai"
+    params:
+        minid    = config["bbmap"]["minid"],
+        maxindel = config["bbmap"]["maxindel"]
     log:
         logE = "logs/bbmap_to_reps/{sample}.err.log"
     conda:
@@ -19,8 +21,9 @@ rule bbmap_to_reps:
             in={input.r1} in2={input.r2} \
             ref={input.ref} \
             ambig=random \
-            minid=0.90 \
-            maxindel=3 \
+            minid={params.minid} \
+            maxindel={params.maxindel} \
+            mappedonly=t \
             threads={threads} \
             out={output.bam}.sam \
             2> {log.logE}
@@ -31,5 +34,4 @@ rule bbmap_to_reps:
         samtools index -@ {threads} {output.bam} 2>> {log.logE}
 
         rm {output.bam}.sam
-        touch {output.check}
         """

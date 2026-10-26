@@ -1,6 +1,6 @@
 rule merge_covered_fraction_samples:
     input:
-        reps = RESULTS_DIR + "/merged/cluster_representatives_filtered_length.tsv",
+        reps = RESULTS_DIR + "/merged/cluster_representatives_list.tsv",
         coverm = expand(
             RESULTS_DIR + "/{sample}/08_{sample}_coverm_filtered_reps.tsv",
             sample=samples["sample"].tolist()

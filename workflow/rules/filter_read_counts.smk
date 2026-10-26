@@ -7,9 +7,9 @@ rule filter_read_counts:
         filtered = RESULTS_DIR + "/merged/reps_read_counts_samples_filtered.tsv",
         stats    = RESULTS_DIR + "/merged/reps_read_counts_samples_filtered_stats.tsv"
     params:
-        min_reads = 2,
-        min_covered_fraction = 0.25,
-        min_covered_bases = 400
+        min_reads = config["filter_read_counts"]["min_reads"],
+        min_covered_fraction = config["filter_read_counts"]["min_covered_fraction"],
+        min_covered_bases = config["filter_read_counts"]["min_covered_bases"]
     log:
         logO = "logs/filter_read_counts/filter_breadth.log",
         logE = "logs/filter_read_counts/filter_breadth.err.log"

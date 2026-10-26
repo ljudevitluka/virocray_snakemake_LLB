@@ -11,5 +11,5 @@ rule merge_contigs:
     shell:
         """
         mkdir -p {RESULTS_DIR}/merged
-        cat {input} > {output.merged}
+        cat {input} > {output.merged} 2> {log}
         """

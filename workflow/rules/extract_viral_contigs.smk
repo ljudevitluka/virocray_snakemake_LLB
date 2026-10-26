@@ -1,10 +1,10 @@
 rule extract_viral_contigs:
     input:
-        fasta="results/{sample}/02_{sample}_spades_rnaviral_contigs_renamed_min500.fasta",
-        taxonomy="results/{sample}/03_{sample}_mmseqs2_taxonomy.tsv",
+        fasta=RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed_min500.fasta",
+        taxonomy=RESULTS_DIR + "/{sample}/03_{sample}_mmseqs2_taxonomy.tsv",
     output:
-        viral_fasta="results/{sample}/04_{sample}_viral_contigs.fasta",
-        viral_tsv="results/{sample}/04_{sample}_viral_taxonomy.tsv",
+        viral_fasta=RESULTS_DIR + "/{sample}/04_{sample}_viral_contigs.fasta",
+        viral_tsv=RESULTS_DIR + "/{sample}/04_{sample}_viral_taxonomy.tsv",
     log:
         logO="logs/extract_viral_contigs/{sample}.log",
         logE="logs/extract_viral_contigs/{sample}.err.log",

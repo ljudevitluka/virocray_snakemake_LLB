@@ -47,7 +47,9 @@ with open(blast_file) as f:
     )
 
     for row in reader:
-        blast_hits[row["qseqid"]] = row
+        # keep only the first (best) hit per query
+        if row["qseqid"] not in blast_hits:
+            blast_hits[row["qseqid"]] = row
 
 
 # write final table

@@ -7,7 +7,8 @@ rule mmseqs2:
         tmpdir       = temp(directory(RESULTS_DIR + "/{sample}/03_{sample}_tmp"))
     params:
         queryprefix  = RESULTS_DIR + "/{sample}/03_{sample}_queryDB",
-        resultprefix = RESULTS_DIR + "/{sample}/03_{sample}_resultDB"
+        resultprefix = RESULTS_DIR + "/{sample}/03_{sample}_resultDB",
+        db           = config["mmseqs2_db"]
     log:
         logO = "logs/mmseqs2/{sample}.db.log",
         logE = "logs/mmseqs2/{sample}.db.err.log"
@@ -21,7 +22,7 @@ rule mmseqs2:
 
         mmseqs taxonomy \
           {params.queryprefix} \
-          /biodbs/mmseqs2/nr_database/nr.fnaDB \
+          {params.db} \
           {params.resultprefix} \
           {output.tmpdir} \
           --threads {threads} --tax-lineage 1 \

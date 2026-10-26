@@ -1,1 +1,36 @@
 samples: config/samples.tsv
+
+##### Databases #####
+# MMseqs2 nr database used for contig taxonomy
+mmseqs2_db: /biodbs/mmseqs2/nr_database/nr.fnaDB
+# nr database for DIAMOND blastx: BLAST nr (DIAMOND >= 2.x reads it directly, incl. taxonomy)
+diamond_nr_db: /biodbs/blastdb/220.ncbi/nr
+# NCBI new_taxdump dir with names.dmp/nodes.dmp (needed by DIAMOND for sscinames)
+diamond_taxdump: resources/taxdump
+
+##### Contig filtering #####
+# Minimum contig length (nt) kept after assembly
+min_contig_length: 500
+
+##### Clustering #####
+filter_edges:
+  min_ani: 90.0        # minimum ANI (%) between two contigs
+  filter_mode: AF      # "AF" (aligned fraction) or "HSP" (longest HSP length)
+  min_hsp_len: 150     # used only when filter_mode is HSP
+  min_af: 0.80         # aligned fraction of the shorter contig, used only when filter_mode is AF
+clustering:
+  resolution: 1.0      # Leiden resolution
+
+##### Read mapping #####
+bbmap:
+  minid: 0.90
+  maxindel: 3
+coverm:
+  min_read_percent_identity: 95
+  min_read_aligned_percent: 95
+
+##### Abundance filtering #####
+filter_read_counts:
+  min_reads: 2
+  min_covered_fraction: 0.25
+  min_covered_bases: 400

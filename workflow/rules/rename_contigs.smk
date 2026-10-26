@@ -1,8 +1,8 @@
 rule rename_contigs:
     input:
-        fasta = "results/{sample}/02_{sample}_spades_rnaviral_contigs.fasta"
+        fasta = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs.fasta"
     output:
-        renamed = "results/{sample}/02_{sample}_spades_rnaviral_contigs_renamed.fasta"
+        renamed = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed.fasta"
     log:
         log = "logs/rename_contigs/{sample}.log"
     conda:
