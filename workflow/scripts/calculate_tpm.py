@@ -40,11 +40,15 @@ def main():
     counts = dataframe[sample_columns].apply(pd.to_numeric, errors="coerce").fillna(0)
     reads_per_kb = counts.div(lengths_kb, axis=0)
     scaling_factors = reads_per_kb.sum(axis=0)
-    if (scaling_factors <= 0).any():
-        invalid = scaling_factors[scaling_factors <= 0].index.tolist()
+    if (scaling_factors < 0).any():
+        invalid = scaling_factors[scaling_factors < 0].index.tolist()
         raise ValueError(f"Cannot calculate TPM for samples with no retained signal: {invalid}")
 
-    tpm = reads_per_kb.div(scaling_factors, axis=1) * 1_000_000
+    tpm = (
+        reads_per_kb.div(scaling_factors.where(scaling_factors > 0), axis=1)
+        .fillna(0)
+        * 1_000_000
+    )
     output = dataframe[[column for column in dataframe.columns if column not in sample_columns]].copy()
     output[sample_columns] = tpm
 

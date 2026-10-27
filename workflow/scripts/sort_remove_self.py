@@ -25,7 +25,7 @@ def main():
     with open(args.input, "r") as fin:
         for i, line in enumerate(fin, 1):
             parts = line.rstrip("\n").split("\t")
-            if len(parts) < 2:
+            if len(parts) < 8:
                 log(f"[WARN] Skipping malformed line {i}")
                 continue
 
