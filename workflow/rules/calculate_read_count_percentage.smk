@@ -1,6 +1,6 @@
 rule calculate_read_count_percentage:
     input:
-        counts = RESULTS_DIR + "/merged/reps_read_counts_samples.tsv",
+        counts = RESULTS_DIR + "/merged/reps_read_counts_samples_filtered.tsv",
         r1 = expand(
             RESULTS_DIR + "/{sample}/01_{sample}_trim_1_paired.fq.gz",
             sample=samples["sample"].tolist()
