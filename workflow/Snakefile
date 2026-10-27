@@ -87,4 +87,3 @@ include: "rules/fill_blastx_missing.smk"
 ###Add functional annotation of RdRps (InterProScan, NeoRdRp2)
 include: "rules/functional_annotation.smk"
 include: "rules/merge_final_table.smk"
-

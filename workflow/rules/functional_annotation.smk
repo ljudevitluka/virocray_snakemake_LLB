@@ -54,17 +54,20 @@ rule interproscan_chunk:
     params:
         ips  = config["interproscan"]["path"],
         appl = config["interproscan"]["applications"],
-        tmp  = ANNOT_DIR + "/interproscan/tmp_{chunk}"
+        tmp  = ANNOT_DIR + "/interproscan/tmp_{chunk}",
+        cpu  = 8
     log:
         logO = "logs/functional_annotation/interproscan_{chunk}.log",
         logE = "logs/functional_annotation/interproscan_{chunk}.err.log"
-    threads: 8
+    # With -cpu 8, InterProScan averages ~5 cores but its Java process peaks at ~14
+    # (measured on a 469-ORF chunk), so 14 are reserved to stay within --cores
+    threads: 14
     shell:
         # -dp: no lookup service, match calculation is done locally
         """
         {params.ips} -i {input.chunk} -f TSV -o {output.tsv} \
             -appl {params.appl} -dp -iprlookup \
-            -cpu {threads} -T {params.tmp} \
+            -cpu {params.cpu} -T {params.tmp} \
             > {log.logO} 2> {log.logE}
         rm -rf {params.tmp}
         """
@@ -82,7 +85,8 @@ rule neordrp_hmmsearch_chunk:
         logE = "logs/functional_annotation/neordrp_{chunk}.err.log"
     conda:
         "../envs/hmmer_env.yaml"
-    threads: 4
+    # hmmsearch is limited by reading the 1.3 GB HMM file (~1.2 cores measured with --cpu 4)
+    threads: 2
     shell:
         """
         hmmsearch --cpu {threads} -E {params.evalue} --domE {params.evalue} \

@@ -1,8 +1,8 @@
 rule filter_viral_contigs_by_length:
     input:
-        f = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed.fasta"
+        f = RESULTS_DIR + "/{sample}/02_{sample}_spades_contigs_renamed.fasta"
     output:
-        f = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed_min500.fasta"
+        f = RESULTS_DIR + "/{sample}/02_{sample}_spades_contigs_renamed_min500.fasta"
     params:
         min_len = config["min_contig_length"]
     log:

@@ -1,6 +1,6 @@
 rule mmseqs2:
     input:
-        f = RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs_renamed_min500.fasta"
+        f = RESULTS_DIR + "/{sample}/02_{sample}_spades_contigs_renamed_min500.fasta"
     output:
         querydb_idx  = RESULTS_DIR + "/{sample}/03_{sample}_queryDB.index",
         resultdb_idx = RESULTS_DIR + "/{sample}/03_{sample}_resultDB.index",
@@ -16,7 +16,12 @@ rule mmseqs2:
         "../envs/mmseqs2_env.yaml"
     threads: 30
     shell:
+        # mmseqs refuses to overwrite existing databases, and Snakemake only removes
+        # the declared .index files before a rerun, so clear the old DB files first
         r"""
+        rm -f {params.queryprefix} {params.queryprefix}.* {params.queryprefix}_h* \
+              {params.resultprefix} {params.resultprefix}.* {params.resultprefix}_*
+
         mmseqs createdb {input.f} {params.queryprefix} \
           > {log.logO} 2> {log.logE}
 

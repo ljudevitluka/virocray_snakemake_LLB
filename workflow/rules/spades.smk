@@ -4,7 +4,7 @@ rule spades:
         r2=RESULTS_DIR + "/{sample}/01_{sample}_trim_2_paired.fq.gz"
     output:
         d=temp(directory(RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_dir")),
-        f=RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_contigs.fasta"
+        f=RESULTS_DIR + "/{sample}/02_{sample}_spades_contigs.fasta"
     log:
         logO="logs/spades/{sample}.log",
         logE="logs/spades/{sample}.err.log"
