@@ -61,9 +61,9 @@ The plot summarises three things:
 - contig degree distribution (number of edges per contig),
 - cluster-size distribution across multi-member clusters.
 
-3. MMseqs2 taxonomy uses the new nr database (`/scratch/lukabostjancic/ViroCray/2026_10_mmseq2/nr.fnaDB`) and can run per sample or for all samples combined (see `mmseqs2_mode` below).
+3. MMseqs2 taxonomy can run per sample or for all samples combined (see `mmseqs2_mode` below). This is a major speed up for the whole pipeline. 
 
-4. Reads are mapped to the cluster representatives with BBMap `mappedonly=t`.
+4. Reads are mapped to the cluster representatives with BBMap `mappedonly=t`. This reduced the storage memory usage of the pipeline. 
 
 5. Functional annotation of all cluster representatives: six-frame ORF calling with EMBOSS `getorf`, then InterProScan 5.78 and NeoRdRp2 `hmmsearch`. A contig gets `has_RdRp = yes` when either program detects an RdRp; E-values, scores and HMM coverage are reported as confidence values. Outputs:
 
@@ -92,20 +92,16 @@ results/merged/final_table_tpm_taxonomy_blastx.tsv
 | `MAX_MEM_GB` | `500` | RAM limit for the whole run in GB. Snakemake only starts jobs that fit in it, and the run is placed under a hard memory limit. |
 | `CONDA_EXE` | `/proj/etools/conda/bin/conda` | Conda executable used to run Snakemake. |
 
-```bash
-MAX_MEM_GB=300 ./run_snakemake.sh --cores 60 -k -p
-```
-
 ### `config/config.yaml`
 
 | Option | Default | Description |
 |---|---|---|
-| `mmseqs2_db` | `.../2026_10_mmseq2/nr.fnaDB` | MMseqs2 database for contig taxonomy |
-| `mmseqs2_split_memory_limit` | `200G` | Memory per MMseqs2 job (lower = less memory, slower) |
+| `mmseqs2_db` | `.../path_to_database/nr.fnaDB` | MMseqs2 database for contig taxonomy |
+| `mmseqs2_split_memory_limit` | `200G` | Memory per MMseqs2 job (lower = less memory/slower) |
 | `mmseqs2_mode` | `per_sample` | `per_sample`: one MMseqs2 job per sample. `combined`: all samples in one job. Both write the same `03_{sample}_mmseqs2_taxonomy.tsv` files. |
 | `spades_memory_gb` | `120` | SPAdes memory limit (`-m`) |
-| `diamond_nr_db` | `/biodbs/blastdb/220.ncbi/nr` | Database for DIAMOND blastx |
-| `diamond_taxdump` | `resources/taxdump` | NCBI taxdump for DIAMOND |
+| `diamond_nr_db` | `/path_to_database/nr` | Database for DIAMOND blastx |
+| `diamond_taxdump` | `/path_to_database/taxdump` | NCBI taxdump for DIAMOND |
 | `min_contig_length` | `500` | Minimum contig length after assembly (nt) |
 | `filter_edges.min_ani` | `90.0` | Minimum ANI between two contigs |
 | `filter_edges.filter_mode` | `AF` | `AF` (aligned fraction) or `HSP` (longest HSP length) |
@@ -121,7 +117,7 @@ MAX_MEM_GB=300 ./run_snakemake.sh --cores 60 -k -p
 | `annotation_chunks` | `20` | Number of chunks for InterProScan / hmmsearch |
 | `interproscan.path` | `.../interproscan-5.78-109.0/interproscan.sh` | InterProScan installation |
 | `interproscan.applications` | `Pfam,CDD,SUPERFAMILY,Gene3D,ProSiteProfiles,NCBIfam` | InterProScan member databases |
-| `neordrp.hmm` / `neordrp.evalue` | `/biodbs/NeoRdRp2/NeoRdRp.2.1.hmm` / `1e-10` | NeoRdRp2 HMMs and E-value cutoff |
+| `neordrp.hmm` / `neordrp.evalue` | `/path_to_database/NeoRdRp.2.1.hmm` / `1e-10` | NeoRdRp2 HMMs and E-value cutoff |
 | `rdrp.interpro_ids` | `config/rdrp_interpro_ids.tsv` | InterPro entries counted as RdRp |
 | `rdrp.signature_regex` | see config | Signature descriptions counted as RdRp |
 | `rdrp.exclude_signatures` | `[PF05183]` | Signatures never counted as RdRp |
