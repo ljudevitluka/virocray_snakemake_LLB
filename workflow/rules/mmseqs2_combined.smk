@@ -19,7 +19,7 @@ rule mmseqs2_combined:
         queryprefix  = MMSEQS_COMBINED_DIR + "/queryDB",
         resultprefix = MMSEQS_COMBINED_DIR + "/resultDB",
         db           = config["mmseqs2_db"],
-        mem_limit    = config["mmseqs2_split_memory_limit"]
+        mem_limit    = config["mmseqs2_combined_split_memory_limit"]
     log:
         logO = "logs/mmseqs2/combined.log",
         logE = "logs/mmseqs2/combined.err.log"
@@ -28,7 +28,8 @@ rule mmseqs2_combined:
     # One job for all samples, so it gets all cores
     threads: 60
     resources:
-        mem_mb = 230000  # split-memory-limit + overhead
+        # split-memory-limit + 30 GB overhead
+        mem_mb = int(config["mmseqs2_combined_split_memory_limit"].rstrip("Gg")) * 1000 + 30000
     shell:
         # mmseqs refuses to overwrite existing databases, so clear old DB files first
         r"""
@@ -58,7 +59,6 @@ rule split_mmseqs2_taxonomy:
     output:
         tsv = RESULTS_DIR + "/{sample}/03_{sample}_mmseqs2_taxonomy.tsv"
     shell:
-        # Contig names are <sample>_NODE_..., so the prefix also keeps UL1 apart from UL10
         r"""
         awk -F'\t' -v p="{wildcards.sample}_NODE_" 'index($1, p) == 1' {input.tsv} > {output.tsv}
         """

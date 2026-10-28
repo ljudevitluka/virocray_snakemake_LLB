@@ -98,6 +98,7 @@ results/merged/final_table_tpm_taxonomy_blastx.tsv
 |---|---|---|
 | `mmseqs2_db` | `.../path_to_database/nr.fnaDB` | MMseqs2 database for contig taxonomy |
 | `mmseqs2_split_memory_limit` | `200G` | Memory per MMseqs2 job (lower = less memory/slower) |
+| `mmseqs2_combined_split_memory_limit` | `400G` | Memory for the MMseqs2 job in `combined` mode |
 | `mmseqs2_mode` | `per_sample` | `per_sample`: one MMseqs2 job per sample. `combined`: all samples in one job. Both write the same `03_{sample}_mmseqs2_taxonomy.tsv` files. |
 | `spades_memory_gb` | `120` | SPAdes memory limit (`-m`) |
 | `diamond_nr_db` | `/path_to_database/nr` | Database for DIAMOND blastx |

@@ -8,7 +8,9 @@ mmseqs2_split_memory_limit: 200G
 # per_sample: one MMseqs2 job per sample (30 threads each)
 # combined:   all samples in one job (60 threads); the nr index is built once instead of
 #             once per sample, so it is much faster. Same memory, same per-sample output.
-mmseqs2_mode: per_sample
+mmseqs2_mode: combined
+# Memory for the combined job (only one MMseqs2 job runs, so it can use more than per sample)
+mmseqs2_combined_split_memory_limit: 400G
 # SPAdes memory limit in GB (-m); the largest sample so far needed 93 GB
 spades_memory_gb: 120
 # nr database for DIAMOND blastx: BLAST nr (DIAMOND >= 2.x reads it directly, incl. taxonomy)
