@@ -10,6 +10,8 @@ rule blast:
     conda:
         "../envs/blast_env.yaml"
     threads: 40
+    resources:
+        mem_mb = 20000
     shell:
         """
         mkdir -p {output.db}

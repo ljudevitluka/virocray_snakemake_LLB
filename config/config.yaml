@@ -3,6 +3,10 @@ samples: config/samples.tsv
 ##### Databases #####
 # MMseqs2 nr database used for contig taxonomy (own build, Oct 2026)
 mmseqs2_db: /scratch/lukabostjancic/ViroCray/2026_10_mmseq2/nr.fnaDB
+# MMseqs2 splits the database to stay under the cap: lower = less memory, but slower.
+mmseqs2_split_memory_limit: 200G
+# SPAdes memory limit in GB (-m); the largest sample so far needed 93 GB
+spades_memory_gb: 120
 # nr database for DIAMOND blastx: BLAST nr (DIAMOND >= 2.x reads it directly, incl. taxonomy)
 diamond_nr_db: /biodbs/blastdb/220.ncbi/nr
 # NCBI new_taxdump dir with names.dmp/nodes.dmp (needed by DIAMOND for sscinames)

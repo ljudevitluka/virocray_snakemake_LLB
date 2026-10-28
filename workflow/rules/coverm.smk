@@ -14,6 +14,8 @@ rule coverm:
     conda:
         "../envs/mapping_env.yaml"
     threads: 12
+    resources:
+        mem_mb = 10000
     shell:
         """
         coverm filter \

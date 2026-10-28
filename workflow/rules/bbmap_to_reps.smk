@@ -14,9 +14,11 @@ rule bbmap_to_reps:
     conda:
         "../envs/mapping_env.yaml"
     threads: 20
+    resources:
+        mem_mb = 25000  # -Xmx20g + samtools
     shell:
         r"""
-        bbmap.sh \
+        bbmap.sh -Xmx20g \
             nodisk=t \
             in={input.r1} in2={input.r2} \
             ref={input.ref} \

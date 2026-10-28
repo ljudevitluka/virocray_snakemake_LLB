@@ -62,6 +62,8 @@ rule interproscan_chunk:
     # With -cpu 8, InterProScan averages ~5 cores but its Java process peaks at ~14
     # (measured on a 469-ORF chunk), so 14 are reserved to stay within --cores
     threads: 14
+    resources:
+        mem_mb = 20000  # Java -Xmx15G + member-database tools
     shell:
         # -dp: no lookup service, match calculation is done locally
         """
@@ -87,6 +89,8 @@ rule neordrp_hmmsearch_chunk:
         "../envs/hmmer_env.yaml"
     # hmmsearch is limited by reading the 1.3 GB HMM file (~1.2 cores measured with --cpu 4)
     threads: 2
+    resources:
+        mem_mb = 4000
     shell:
         """
         hmmsearch --cpu {threads} -E {params.evalue} --domE {params.evalue} \

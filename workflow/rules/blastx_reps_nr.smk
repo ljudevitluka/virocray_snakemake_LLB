@@ -12,6 +12,8 @@ rule blastx_reps_nr:
     conda:
         "../envs/diamond_env.yaml"
     threads: 60
+    resources:
+        mem_mb = 100000  # DIAMOND estimate
     shell:
         # Column order matches fill_missing_blastx.py; DIAMOND has no sacc/qcovs,
         # so sseqid (= accession for nr) and qcovhsp (= qcovs with --max-hsps 1) are used instead.

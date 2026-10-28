@@ -5,15 +5,19 @@ rule spades:
     output:
         d=temp(directory(RESULTS_DIR + "/{sample}/02_{sample}_spades_rnaviral_dir")),
         f=RESULTS_DIR + "/{sample}/02_{sample}_spades_contigs.fasta"
+    params:
+        mem_gb = config["spades_memory_gb"]
     log:
         logO="logs/spades/{sample}.log",
         logE="logs/spades/{sample}.err.log"
     conda:
         "../envs/spades_env.yaml"
     threads: 30
+    resources:
+        mem_mb = 120000  # matches -m below
     shell:
         r"""
-        rnaviralspades.py -t {threads} \
+        rnaviralspades.py -t {threads} -m {params.mem_gb} \
           -1 {input.r1} -2 {input.r2} \
           -o {output.d} \
           > {log.logO} 2> {log.logE}

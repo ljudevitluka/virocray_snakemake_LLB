@@ -13,6 +13,8 @@ rule mmseqs2_tsv:
     conda:
         "../envs/mmseqs2_env.yaml"
     threads: 4
+    resources:
+        mem_mb = 10000
     shell:
         r"""
         mmseqs createtsv \

@@ -1,6 +1,6 @@
 # Raw sequencing reads and other large input files
 resources/
-
+config/samples.tsv
 # Generated workflow output and runtime files
 results/
 logs/
