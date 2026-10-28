@@ -58,8 +58,11 @@ include: "rules/spades.smk"
 include: "rules/rename_contigs.smk"
 include: "rules/filter_viral_contigs_by_length.smk"
 ###Assign taxonomy and extract viral contigs
-include: "rules/mmseqs2.smk"
-include: "rules/mmseqs2_tsv.smk"
+if config.get("mmseqs2_mode", "per_sample") == "combined":
+    include: "rules/mmseqs2_combined.smk"
+else:
+    include: "rules/mmseqs2.smk"
+    include: "rules/mmseqs2_tsv.smk"
 include: "rules/extract_viral_contigs.smk"
 include: "rules/merge_contigs.smk"
 include: "rules/merge_taxonomy_tables.smk"
