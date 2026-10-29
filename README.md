@@ -79,7 +79,7 @@ results/merged/functional_annotation/reps_rdrp_proteins.faa
 results/merged/final_table_tpm_taxonomy_blastx.tsv
 ```
 
-7. Memory limit: the whole run is capped at 500 GB RAM by `run_snakemake.sh` (see `MAX_MEM_GB` below).
+7. Memory limit: jobs are limited to 500 GB RAM and the whole run to a hard 900 GB by `run_snakemake.sh` (see `MAX_MEM_GB` and `HARD_MEM_GB` below).
 
 8. Hardcoded values were moved to `config/config.yaml`.
 
@@ -89,7 +89,8 @@ results/merged/final_table_tpm_taxonomy_blastx.tsv
 
 | Option | Default | Description |
 |---|---|---|
-| `MAX_MEM_GB` | `500` | RAM limit for the whole run in GB. Snakemake only starts jobs that fit in it, and the run is placed under a hard memory limit. |
+| `MAX_MEM_GB` | `500` | RAM budget for the jobs in GB. Snakemake only starts jobs that fit in it. |
+| `HARD_MEM_GB` | `900` | Hard memory limit for the whole run in GB, including cached database files. The run is killed if it goes over. |
 | `CONDA_EXE` | `/proj/etools/conda/bin/conda` | Conda executable used to run Snakemake. |
 
 ### `config/config.yaml`
@@ -99,7 +100,7 @@ results/merged/final_table_tpm_taxonomy_blastx.tsv
 | `mmseqs2_db` | `.../path_to_database/nr.fnaDB` | MMseqs2 database for contig taxonomy |
 | `mmseqs2_split_memory_limit` | `200G` | Memory per MMseqs2 job (lower = less memory/slower) |
 | `mmseqs2_combined_split_memory_limit` | `400G` | Memory for the MMseqs2 job in `combined` mode |
-| `mmseqs2_mode` | `per_sample` | `per_sample`: one MMseqs2 job per sample. `combined`: all samples in one job. Both write the same `03_{sample}_mmseqs2_taxonomy.tsv` files. |
+| `mmseqs2_mode` | `combined` | `per_sample`: one MMseqs2 job per sample. `combined`: all samples in one job. Both write the same `03_{sample}_mmseqs2_taxonomy.tsv` files. In `combined` mode, a crashed MMseqs2 job resumes where it stopped when the run is restarted with the same inputs, threads and memory limit. |
 | `spades_memory_gb` | `120` | SPAdes memory limit (`-m`) |
 | `diamond_nr_db` | `/path_to_database/nr` | Database for DIAMOND blastx |
 | `diamond_taxdump` | `/path_to_database/taxdump` | NCBI taxdump for DIAMOND |
